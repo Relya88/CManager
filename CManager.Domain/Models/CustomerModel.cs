@@ -1,5 +1,8 @@
 ﻿namespace CManager.Domain.Models;
 
+//klassen som beskriver en kund i systemet och innehåller all den information som behövs för att hantera kunden, 
+//med allt från unikt id för varje kund som skapats med GUID till komplett adressobjekt tillhörande kund
+
 public class CustomerModel
 {
     public Guid Id { get; set; }

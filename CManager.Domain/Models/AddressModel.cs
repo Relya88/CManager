@@ -1,5 +1,6 @@
 ﻿namespace CManager.Domain.Models;
 
+//klassen som representerar en adress tillhörande kund
 public class AddressModel
 {
     public string StreetAddress { get; set; } = null!;
