@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="CManager.Console.Presentation.ConsoleApp/CManager.Console.Presentation.ConsoleApp.csproj" />
+  <Project Path="CManager.Core.Domain/CManager.Core.Domain.csproj" />
 </Solution>
