@@ -226,6 +226,7 @@ public class MenuController
         Console.ReadKey();
     }
 
+
     // Fick tipset att ta bort den från console.Writheline delen för att slippa upprepa, så la till en gemensam felutskrift för tom input istället
     private void ShowInputError(string fieldName)
     {
