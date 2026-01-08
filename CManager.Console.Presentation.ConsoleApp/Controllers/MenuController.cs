@@ -27,7 +27,8 @@ public class MenuController
             Console.WriteLine("Customer Manager Core");
             Console.WriteLine("1. Create customer");
             Console.WriteLine("2. View customers");
-            Console.WriteLine("3. Delete customer");
+            Console.WriteLine("3. View customer details");
+            Console.WriteLine("4. Delete customer");
             Console.WriteLine("0. Exit");
             Console.Write("Choose option: ");
 
@@ -44,11 +45,15 @@ public class MenuController
                     break;
 
                 case "3":
+                    ViewCustomerDetails();
+                    break;
+
+                case "4":
                     DeleteCustomer();
                     break;
 
                 case "0":
-                    //avslutar menyn och programmet
+                    // Avslutar menyn och programmet
                     return;
 
                 default:
@@ -88,7 +93,7 @@ public class MenuController
             return;
         }
 
-        // Skapade ett nytt objekt (customerModel) med hjälp av chatgpt för varje kund alltid ska få ett unikt id (Guid.NweGuid)
+        // Skapade ett nytt objekt (customerModel) med hjälp av chatgpt för varje kund alltid ska få ett unikt id (Guid.NewGuid)
         var customer = new CustomerModel
         {
             Id = Guid.NewGuid(),
@@ -139,7 +144,55 @@ public class MenuController
         Console.ReadKey();
     }
 
-    // Tar bort en kund baserat på mail men själva bortaggningen sker via kundes unika id i servicelagret
+
+    // får upp all info om en specifik kund baserat på deras mail
+    private void ViewCustomerDetails()
+    {
+        Console.Clear();
+        Console.WriteLine("View customer details");
+
+        var customers = _customerService.GetCustomers();
+
+        if (!customers.Any())
+        {
+            Console.WriteLine("No customers found.");
+            Console.ReadKey();
+            return;
+        }
+
+        // Visar alla kunders mail
+        foreach (var customer in customers)
+        {
+            Console.WriteLine(customer.Email);
+        }
+
+        Console.WriteLine();
+        Console.Write("Enter email of customer: ");
+        var email = Console.ReadLine();
+
+        var customerToView = customers.FirstOrDefault(c => c.Email == email);
+
+        if (customerToView == null)
+        {
+            Console.WriteLine("Customer not found.");
+            Console.ReadKey();
+            return;
+        }
+
+        Console.WriteLine();
+        Console.WriteLine("Customer details:");
+        Console.WriteLine($"Name: {customerToView.FirstName} {customerToView.LastName}");
+        Console.WriteLine($"Id: {customerToView.Id}");
+        Console.WriteLine($"Email: {customerToView.Email}");
+        Console.WriteLine($"Phone number: {customerToView.PhoneNumber}");
+        Console.WriteLine($"Address: {customerToView.Address.Street}, {customerToView.Address.PostalCode}, {customerToView.Address.City}");
+
+        Console.WriteLine();
+        Console.WriteLine("Press any key to continue..");
+        Console.ReadKey();
+    }
+
+    // Tar bort en kund baserat på mail men själva borttagningen sker via kundes unika id i servicelagret
     private void DeleteCustomer()
     {
         Console.Clear();
@@ -175,13 +228,13 @@ public class MenuController
             return;
         }
 
-        // förfrågan och bekräftelse på borttagning av kunden
+        // förfrågan och bekräftelse på borttagning av kunden. (skrev om kodsnutten med hjälp av chatgpt för min fungerade ej i konsolen)
         Console.WriteLine();
         Console.WriteLine($"Are you sure you want to delete customer '{customerToDelete.Email}'?");
         Console.Write("Type Y to confirm or N to cancel: ");
         var confirmation = Console.ReadLine();
 
-        //måste bekräftas med yes annars avbryts det (tog hjälp av chatgpt för denna del)
+        //måste bekräftas med yes annars avbryts det 
         if (!string.Equals(confirmation, "Y", StringComparison.OrdinalIgnoreCase))
         {
             Console.WriteLine("Deletion cancelled.");
