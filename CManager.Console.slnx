@@ -4,4 +4,5 @@
   <Project Path="CManager.Core.Domain/CManager.Core.Domain.csproj" />
   <Project Path="CManager.Core.Infrastructure/CManager.Core.Infrastructure.csproj" Id="6bf8185c-fb58-4356-a314-b1b03da58eea" />
   <Project Path="CManager.Core.Tests/CManager.Core.Tests.csproj" Id="3c108378-59da-4e95-8930-efc3ec0d65b5" />
+  <Project Path="CManager.Presentation.GuiApp/CManager.Presentation.GuiApp.csproj" Id="8025f6c8-f58b-42a8-995a-8b7341034cf3" />
 </Solution>
